@@ -69,8 +69,8 @@ class WishListViewController: UIViewController, UITableViewDataSource {
                 }
             }
             productList.remove(at: indexPath.row)
-            tableView.deselectRow(at: [indexPath.row], animated: true)
-            tableView.reloadData()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         } else if editingStyle == .insert {
             
         }
