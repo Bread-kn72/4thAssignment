@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         }
     }
     
+    let refreshControl = UIRefreshControl()
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -73,6 +75,9 @@ class ViewController: UIViewController {
                         // product를 디코드하여, currentProduct 변수에 담습니다.
                         let product = try JSONDecoder().decode(RemoteProduct.self, from: data)
                         self.currentProduct = product
+                        DispatchQueue.main.async {
+                            self.refreshControl.endRefreshing()
+                        }
                     } catch {
                         print("Decode Error: \(error)")
                     }
@@ -101,6 +106,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         self.fetchRemoteProduct()
     }
     
@@ -109,6 +115,10 @@ class ViewController: UIViewController {
         titleLabel.text = currentProduct?.title
         descriptionLabel.text = currentProduct?.description
         priceLabel.text = "\(currentProduct!.price)$"
+    }
+    
+    @objc private func refreshData(_ Sender: Any) {
+        fetchRemoteProduct()
     }
 }
 

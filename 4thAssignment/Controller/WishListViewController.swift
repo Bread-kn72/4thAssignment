@@ -19,9 +19,13 @@ class WishListViewController: UIViewController, UITableViewDataSource {
     static let identifier = "WishListViewController"
     @IBOutlet weak var tableView: UITableView!
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         setProductList()
     }
 
@@ -62,4 +66,14 @@ class WishListViewController: UIViewController, UITableViewDataSource {
             
         }
     }
+    
+    @objc private func refreshData(_ sender: Any) {
+            // CoreData에서 데이터 다시 불러오기
+            setProductList()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        }
 }
