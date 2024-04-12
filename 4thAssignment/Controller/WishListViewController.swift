@@ -59,6 +59,15 @@ class WishListViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            if let context = self.persistentContainer?.viewContext {
+                let productToRemove = self.productList[indexPath.row]
+                context.delete(productToRemove)
+                do {
+                    try context.save()
+                } catch {
+                    print("Failed to save context: \(error)")
+                }
+            }
             productList.remove(at: indexPath.row)
             tableView.deselectRow(at: [indexPath.row], animated: true)
             tableView.reloadData()

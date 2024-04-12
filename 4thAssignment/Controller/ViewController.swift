@@ -106,7 +106,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         self.fetchRemoteProduct()
     }
     
@@ -115,10 +114,6 @@ class ViewController: UIViewController {
         titleLabel.text = currentProduct?.title
         descriptionLabel.text = currentProduct?.description
         priceLabel.text = "\(currentProduct!.price)$"
-    }
-    
-    @objc private func refreshData(_ Sender: Any) {
-        fetchRemoteProduct()
     }
 }
 
