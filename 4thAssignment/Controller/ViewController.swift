@@ -37,9 +37,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // 위시 리스트 담기 버튼 클릭 시 호출되는 IBAction
     @IBAction func tappedSaveProductButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "위시 리스트 담기", message: "위시 리스트에 담겼습니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
         self.saveWishProduct() // Core Data에 상품을 저장하는 함수 호출
     }
     
@@ -107,6 +111,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchRemoteProduct()
+        self.setScrollView()
+        
     }
     
     private func setView() {
@@ -114,6 +120,21 @@ class ViewController: UIViewController {
         titleLabel.text = currentProduct?.title
         descriptionLabel.text = currentProduct?.description
         priceLabel.text = "\(currentProduct!.price)$"
+    }
+    
+    private func setScrollView() {
+        scrollView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshData(_ sender: Any) {
+        // CoreData에서 데이터 다시 불러오기
+        fetchRemoteProduct()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.scrollView.reloadInputViews()
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 
