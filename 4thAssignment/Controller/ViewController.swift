@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         // CoreData에서 데이터 다시 불러오기
         fetchRemoteProduct()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.async {
             self.scrollView.reloadInputViews()
             self.refreshControl.endRefreshing()
         }
