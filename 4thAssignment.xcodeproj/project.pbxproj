@@ -13,6 +13,9 @@
 		4D8033592BC7DC1D0043E42A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D8033582BC7DC1D0043E42A /* Base */; };
 		4D80335B2BC7DC1E0043E42A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D80335A2BC7DC1E0043E42A /* Assets.xcassets */; };
 		4D80335E2BC7DC1E0043E42A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D80335D2BC7DC1E0043E42A /* Base */; };
+		4D8033662BC7E2FF0043E42A /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8033652BC7E2FF0043E42A /* WishListViewController.swift */; };
+		4D8033702BC7F6F60043E42A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D80336E2BC7F6F60043E42A /* Model.xcdatamodeld */; };
+		4D8033742BC7F8280043E42A /* RemoteProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8033732BC7F8280043E42A /* RemoteProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		4D80335A2BC7DC1E0043E42A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D80335D2BC7DC1E0043E42A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D80335F2BC7DC1E0043E42A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D8033652BC7E2FF0043E42A /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
+		4D80336F2BC7F6F60043E42A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4D8033732BC7F8280043E42A /* RemoteProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,42 @@
 		4D8033502BC7DC1D0043E42A /* 4thAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				4D80336B2BC7F5FD0043E42A /* Model */,
+				4D8033692BC7ED480043E42A /* View */,
+				4D80336A2BC7ED580043E42A /* Controller */,
 				4D8033512BC7DC1D0043E42A /* AppDelegate.swift */,
 				4D8033532BC7DC1D0043E42A /* SceneDelegate.swift */,
-				4D8033552BC7DC1D0043E42A /* ViewController.swift */,
-				4D8033572BC7DC1D0043E42A /* Main.storyboard */,
 				4D80335A2BC7DC1E0043E42A /* Assets.xcassets */,
 				4D80335C2BC7DC1E0043E42A /* LaunchScreen.storyboard */,
 				4D80335F2BC7DC1E0043E42A /* Info.plist */,
+				4D80336E2BC7F6F60043E42A /* Model.xcdatamodeld */,
 			);
 			path = 4thAssignment;
+			sourceTree = "<group>";
+		};
+		4D8033692BC7ED480043E42A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4D8033572BC7DC1D0043E42A /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4D80336A2BC7ED580043E42A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4D8033552BC7DC1D0043E42A /* ViewController.swift */,
+				4D8033652BC7E2FF0043E42A /* WishListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4D80336B2BC7F5FD0043E42A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D8033732BC7F8280043E42A /* RemoteProduct.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D8033562BC7DC1D0043E42A /* ViewController.swift in Sources */,
+				4D8033662BC7E2FF0043E42A /* WishListViewController.swift in Sources */,
 				4D8033522BC7DC1D0043E42A /* AppDelegate.swift in Sources */,
+				4D8033702BC7F6F60043E42A /* Model.xcdatamodeld in Sources */,
 				4D8033542BC7DC1D0043E42A /* SceneDelegate.swift in Sources */,
+				4D8033742BC7F8280043E42A /* RemoteProduct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +335,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,6 +363,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -361,6 +399,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4D80336E2BC7F6F60043E42A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4D80336F2BC7F6F60043E42A /* Model.xcdatamodel */,
+			);
+			currentVersion = 4D80336F2BC7F6F60043E42A /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4D8033462BC7DC1D0043E42A /* Project object */;
 }
