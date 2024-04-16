@@ -8,18 +8,16 @@
 import UIKit
 import CoreData
 
-class WishListViewController: UIViewController, UITableViewDataSource {
+class WishListViewController: UIViewController {
 
     var persistentContainer: NSPersistentContainer? {
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     }
     
     private var productList: [Product] = []
-    
     static let identifier = "WishListViewController"
-    @IBOutlet weak var tableView: UITableView!
-    
     let refreshControl = UIRefreshControl()
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +35,25 @@ class WishListViewController: UIViewController, UITableViewDataSource {
             self.productList = productList
         }
     }
+    
+    @objc private func refreshData(_ sender: Any) {
+        // CoreData에서 데이터 다시 불러오기
+        setProductList()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    private func setTableViewRefreshControl() {
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        setProductList()
+    }
+}
+
+extension WishListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.productList.count
@@ -72,21 +89,5 @@ class WishListViewController: UIViewController, UITableViewDataSource {
         } else if editingStyle == .insert {
             
         }
-    }
-    
-    @objc private func refreshData(_ sender: Any) {
-        // CoreData에서 데이터 다시 불러오기
-        setProductList()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
-        }
-    }
-    
-    private func setTableViewRefreshControl() {
-        tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        setProductList()
     }
 }

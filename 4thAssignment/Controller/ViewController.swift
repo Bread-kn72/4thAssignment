@@ -39,6 +39,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // Method --------------------
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.fetchRemoteProduct()
+        self.setScrollView()
+        
+    }
+    
     // 위시 리스트 담기 버튼 클릭 시 호출되는 IBAction
     @IBAction func tappedSaveProductButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "위시 리스트 담기", message: "위시 리스트에 담겼습니다.", preferredStyle: .alert)
@@ -108,13 +116,6 @@ class ViewController: UIViewController {
         try? context.save()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.fetchRemoteProduct()
-        self.setScrollView()
-        
-    }
-    
     private func setView() {
         imageView.image = nil
         titleLabel.text = currentProduct?.title
@@ -127,8 +128,8 @@ class ViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
     
+    // CoreData에서 데이터 다시 불러오기
     @objc private func refreshData(_ sender: Any) {
-        // CoreData에서 데이터 다시 불러오기
         fetchRemoteProduct()
         
         DispatchQueue.main.async {
