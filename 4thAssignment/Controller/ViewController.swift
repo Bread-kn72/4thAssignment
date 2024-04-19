@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
+    
+    var productService = ProductService()
 
     var persistentContainer: NSPersistentContainer? {
         (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
@@ -74,32 +76,18 @@ class ViewController: UIViewController {
     
     // URLSession을 통해 RemoteProduct를 가져와 currentProduct 변수에 저장합니다.
     private func fetchRemoteProduct() {
-        // 1 ~ 100 사이의 랜덤한 Int 숫자를 가져옵니다.
-        let productID = Int.random(in: 1 ... 100)
-        
-        // URLSession을 통해 RemoteProduct를 가져옵니다.
-        if let url = URL(string: "https://dummyjson.com/products/\(productID)") {
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let error = error {
-                    print("Error: \(error)")
-                } else if let data = data {
-                    do {
-                        // product를 디코드하여, currentProduct 변수에 담습니다.
-                        let product = try JSONDecoder().decode(RemoteProduct.self, from: data)
+            productService.fetchRemoteProduct { result in
+                switch result {
+                case .success(let product):
+                    DispatchQueue.main.async {
                         self.currentProduct = product
-                        DispatchQueue.main.async {
-                            self.refreshControl.endRefreshing()
-                        }
-                    } catch {
-                        print("Decode Error: \(error)")
+                        self.refreshControl.endRefreshing()
                     }
+                case .failure(let error):
+                    print("Error fetching remote product: \(error)")
                 }
             }
-            
-            // 네트워크 요청 시작
-            task.resume()
         }
-    }
 
     // currentProduct를 가져와 Core Data에 저장합니다.
     private func saveWishProduct() {
